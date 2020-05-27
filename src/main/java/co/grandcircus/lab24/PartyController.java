@@ -46,10 +46,9 @@ public class PartyController {
 		return "vote";
 	}
 	
-	@RequestMapping("/vote/add")
+	@RequestMapping("/vote/add-vote")
 	public String addVote(
-			@RequestParam String id,
-			Model model
+			@RequestParam String id
 			) {
 		
 		List<PartyOption> partyOptions = partyOptionsDao.findAll();
@@ -60,6 +59,21 @@ public class PartyController {
 				partyOptionsDao.save(option);
 			}
 		}
+		
+		return "redirect:/vote";
+	}
+	
+	@RequestMapping("/vote/add-option")
+	public String addOption(
+			@RequestParam(value="name") String name,
+			@RequestParam(value="description") String description
+			) {
+		
+		//Create new option
+		PartyOption option = new PartyOption(name, description);
+		
+		//Save to table
+		partyOptionsDao.save(option);
 		
 		return "redirect:/vote";
 	}

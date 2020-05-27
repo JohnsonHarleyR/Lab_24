@@ -52,7 +52,7 @@ Navigation:
       <td><c:out value="${option.description}" /></td>
       <td><c:out value="${option.votes}" /></td>
       <td>
-      	<form action="/vote/add">
+      	<form action="/vote/add-vote">
       	<input type="hidden" name="id" value="${option.id}"/>
       	<button class="btn btn-outline-success" type="submit">Vote!</button>
       	</form>
@@ -67,6 +67,19 @@ Navigation:
 
 <!-- Add Option -->
 <section>
+
+<h2>Add an Option</h2>
+<form action="/vote/add-option">
+
+<label>Name: </label>
+<input type="text" name="name" required/>
+
+<label>Description: </label>
+<input type="text" name="description" maxlength=250 required/>
+
+<button class="btn btn-outline-success" type="submit">Add</button>
+
+</form>
 
 </section>
 

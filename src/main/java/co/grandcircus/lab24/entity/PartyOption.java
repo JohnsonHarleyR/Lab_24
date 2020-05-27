@@ -20,6 +20,15 @@ public class PartyOption {
 	
 	private int votes;
 
+	public PartyOption() {
+		
+	}
+	
+	public PartyOption(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+	
 	public Long getId() {
 		return id;
 	}
