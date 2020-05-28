@@ -1,6 +1,7 @@
 package co.grandcircus.lab24.dao;
 
 import co.grandcircus.lab24.entity.Party;
+import co.grandcircus.lab24.entity.PartyOption;
 
 import java.util.List;
 
@@ -44,6 +45,14 @@ public class PartiesDao {
 		
 	}
 	
+	public List<Party> findById(Long pId) {
+		
+		//JPQL - query uses named parameter
+		return em.createQuery("SELECT p FROM Party p WHERE pId = :p.id",
+				Party.class).setParameter("id", pId).getResultList();
+	}
+	
+	//this is probably unnecessary?
 	public List<Party> findByCategory(String category) {
 		
 		//JPQL - query uses named parameter

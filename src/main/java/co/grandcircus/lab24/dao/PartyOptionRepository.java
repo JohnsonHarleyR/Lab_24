@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import co.grandcircus.lab24.entity.PartyOption;
 
 public interface PartyOptionRepository extends JpaRepository<PartyOption, Long> {
-
+	
+	//search by party.id
+	List<PartyOption> findByPartyId(Long partyId);
 
 }

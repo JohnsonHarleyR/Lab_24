@@ -1,10 +1,16 @@
 package co.grandcircus.lab24.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 
 @Entity
 @Table(name="party_options")
@@ -19,14 +25,22 @@ public class PartyOption {
 	private String description;
 	
 	private int votes;
+	
+	//link Party class
+	@ManyToOne //Tbh I don't think I understand the relationship stuff completely,
+	private Party party; //just like real life
 
 	public PartyOption() {
-		
+		super();
 	}
 	
-	public PartyOption(String name, String description) {
+	public PartyOption(String name, String description, Party party) {
+		super();
 		this.name = name;
 		this.description = description;
+		this.party = party;
+		votes = 0;
+		
 	}
 	
 	public Long getId() {
@@ -61,10 +75,20 @@ public class PartyOption {
 		this.votes = votes;
 	}
 	
+	public Party getParty() {
+		return party;
+	}
+
+	public void setParty(Party party) {
+		this.party = party;
+	}
+
+
 	@Override
 	public String toString() {
 		return "PartyOption [id=" + id + ", name=" + name + 
-				", description=" + description + ", votes=" + votes + "]";
+				", description=" + description + ", votes=" + votes +
+				", party=" + party.getName() + "]";
 	}
 	
 }

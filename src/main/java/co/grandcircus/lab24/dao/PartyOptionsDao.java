@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import co.grandcircus.lab24.entity.SortByVotes;
+import co.grandcircus.lab24.entity.Party;
 import co.grandcircus.lab24.entity.PartyOption;
 
 @Repository
@@ -45,11 +46,23 @@ public class PartyOptionsDao {
 				PartyOption.class).getResultList();
 	}
 	
+	
+	public List<PartyOption> findByPartyId(Long partyId) {
+		
+		//JPQL - query uses named parameter
+		return em.createQuery("SELECT p FROM PartyOption p WHERE p.party.id = :partyId",
+				PartyOption.class).setParameter("partyId", partyId).getResultList();
+		//Omg I did it
+	}
+	
+	
+	
 	public List<PartyOption> findByCategory(String category) {
 		
 		//JPQL - query uses named parameter
-		return em.createQuery("SELECT p FROM PartyOption p WHERE p.category = :category",
+		return em.createQuery("SELECT p FROM PartyOption WHERE p.category = :category",
 				PartyOption.class).setParameter("category", category).getResultList();
+		
 	}
 	
 

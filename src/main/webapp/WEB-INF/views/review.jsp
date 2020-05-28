@@ -24,16 +24,17 @@ integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7
 <section>
 Navigation: 
 <a href="/">Parties</a>
-<a href="/vote">Options & Votes</a> 
+<a href="/vote?party=${optionList[0].party.id}">Options & Votes</a> 
 </section>
 
 <!-- Header -->
 <section>
-<h1>Pizza Options</h1>
+<h1>Pizza Options for Party:</h1>
 </section>
 
 <!-- Table -->
 <section>
+<h2><c:out value="${optionList[0].party.name}" /></h2>
 <table class="table table-borderless">
   <thead>
     <tr>
