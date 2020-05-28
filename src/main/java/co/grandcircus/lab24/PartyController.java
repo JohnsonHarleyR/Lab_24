@@ -6,9 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
+
 import co.grandcircus.lab24.dao.PartiesDao;
 import co.grandcircus.lab24.entity.SortByVotes;
 import co.grandcircus.lab24.dao.PartyOptionRepository;
@@ -186,6 +191,22 @@ public class PartyController {
 		model.addAttribute("partyList", partiesDao.findAll());
 		
 		return "review-all";
+	}
+	
+	//In case the tables are empty.
+	@PostConstruct
+	public void preload() {
+		//If there are no listed parties
+		if (partyRepository.count() == 0) {
+			//new party
+			LocalDate date = LocalDate.of(2020, Month.OCTOBER, 13);
+			Party party = new Party("Harley's Surprise Birthday", date);
+			partyRepository.save(party);
+			//new option for that party
+			partyOptionRepository.save(new PartyOption("Pepperoni", "THE classic.", party));
+		}
+		
+		//if there are no parties, there shouldn't be any options
 	}
 	
 }

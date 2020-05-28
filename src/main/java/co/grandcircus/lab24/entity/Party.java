@@ -19,6 +19,15 @@ public class Party {
 	private String name;
 	
 	private LocalDate date;
+	
+	public Party() {
+		
+	}
+	
+	public Party(String name, LocalDate date) {
+		this.name = name;
+		this.date = date;
+	}
 
 	public Long getId() {
 		return id;

@@ -29,7 +29,7 @@ Navigation:
 
 <!-- Header -->
 <section>
-<h1>Pizza Options</h1>
+<h1>Pizza Options for All Parties</h1>
 </section>
 
 <!-- Table -->
