@@ -46,6 +46,12 @@ public class PartyOptionsDao {
 				PartyOption.class).getResultList();
 	}
 	
+public List<PartyOption> findById(Long id) {
+		
+		//JPQL - query uses named parameter
+		return em.createQuery("SELECT p FROM PartyOption p WHERE p.id = :id",
+				PartyOption.class).setParameter("id", id).getResultList();
+	}
 	
 	public List<PartyOption> findByPartyId(Long partyId) {
 		

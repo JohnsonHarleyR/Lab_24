@@ -43,6 +43,7 @@ Navigation:
       <th scope="col">Description</th>
       <th scope="col">Votes</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
@@ -59,9 +60,17 @@ Navigation:
       <td><c:out value="${option.description}" /></td>
       <td><c:out value="${option.votes}" /></td>
       <td>
+      <!-- vote -->
       	<form action="/vote-all/add-vote">
       	<input type="hidden" name="id" value="${option.id}"/>
       	<button class="btn btn-outline-success" type="submit">Vote!</button>
+      	</form>
+      	</td>
+      	<td>
+      	<!-- Edit -->
+      	<form action="/edit">
+      	<input type="hidden" name="option" value="${option.id}"/>
+      	<button class="btn btn-outline-light" type="submit">Edit</button>
       	</form>
       </td>
       </tr>

@@ -161,7 +161,7 @@ public class PartyController {
 	
 	@RequestMapping("/review")
 	public String reviewPage(
-			@RequestParam("party") Long partyId,
+			@RequestParam(value = "party") Long partyId,
 			Model model) {
 		
 		List<PartyOption> optionList = partyOptionsDao.findByPartyId(partyId);
@@ -193,6 +193,50 @@ public class PartyController {
 		return "review-all";
 	}
 	
+	//Edit an option
+	@RequestMapping("/edit")
+	public String edit(
+			@RequestParam(value = "option") Long optionId,
+			Model model
+			) {
+		
+		//Make list of options
+		List<PartyOption> options = partyOptionsDao.findAll();
+		//find optionId in list
+		for (PartyOption opt: options) {
+			if (opt.getId() == optionId) {
+				//add that option to jsp
+				PartyOption option = opt;
+				model.addAttribute("option", option);
+			}
+		}
+		
+		return ("/edit");
+	}
+	
+	//submit edit
+		@RequestMapping("/edit-submit")
+		public String editSubmit(
+				@RequestParam(value = "optionId") Long optionId,
+				@RequestParam(value = "name") String name,
+				@RequestParam(value = "description") String description,
+				Model model
+				) {
+			
+			//set new properties
+			List<PartyOption> options = partyOptionsDao.findAll();
+			for (PartyOption option: options) {
+				if (option.getId() == optionId) {
+					option.setName(name);
+					option.setDescription(description);
+					partyOptionsDao.save(option);
+					return ("redirect:/vote?party=" + option.getParty().getId());
+				}
+			}
+			
+			return ("redirect:/vote-all");
+		}
+	
 	//In case the tables are empty.
 	@PostConstruct
 	public void preload() {
@@ -208,5 +252,6 @@ public class PartyController {
 		
 		//if there are no parties, there shouldn't be any options
 	}
+	
 	
 }
